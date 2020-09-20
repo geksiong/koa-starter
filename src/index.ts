@@ -4,14 +4,13 @@ import logger from "koa-logger";
 import json from "koa-json";
 import bodyParser from "koa-bodyparser";
 
+import { unprotectedRouter } from "./routes.unprotected";
+
 /** Local imports **/
 import { config } from "./config";
 
 /** Start **/
 const app = new Koa();
-const router = new Router();
-
-const PORT = config.port;
 
 /** Middlewares **/
 app.use(json());
@@ -19,22 +18,9 @@ app.use(logger());
 app.use(bodyParser());
 
 /** Routes **/
-app.use(router.routes()).use(router.allowedMethods());
+app.use(unprotectedRouter.routes()).use(unprotectedRouter.allowedMethods());
 
-router.get("/", async (ctx: Koa.Context, next: () => Promise<any>) => {
-  ctx.body = { message: "This is your GET route" };
-
-  await next();
-});
-
-router.post("/data", async (ctx: Koa.Context, next: () => Promise<any>) => {
-  ctx.body = {
-    message: "This is your POST route, attached you can find the data you sent",
-    body: ctx.request.body,
-  };
-  await next();
-});
-
+const PORT = config.port;
 const server = app
   .listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
   .on("error", (err) => {

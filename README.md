@@ -22,12 +22,14 @@ This project aims to provide a starter layout, configuration and workflow for a 
 - koa-bodyparser
 - koa-logger
 - koa-json
+- koa-jwt
 
 ## To do list
 
-- [ ] dotenv support
+- [x] dotenv support
 - [ ] koa-helmet
-- [ ] koa-jwt
+- [x] koa-jwt
+- [ ] user auth and jwt issuance
 - [ ] cors
 - [ ] choose a logger framework
 - [ ] choose a database ORM lib

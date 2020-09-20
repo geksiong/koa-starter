@@ -1,0 +1,5 @@
+# Sample dotenv file
+# Create a similar .env file for your environment
+
+# Application port (default 3000)
+PORT=3000

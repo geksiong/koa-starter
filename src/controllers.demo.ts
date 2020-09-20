@@ -14,4 +14,11 @@ export default class DemoController {
     const name = ctx.request.body?.name || "NONAME";
     ctx.body = { message: DemoServices.helloWithName(name) };
   }
+
+  public static async helloWithSecret(ctx: Context): Promise<void> {
+    const secretMsg = ctx.request.body?.secretMsg || "";
+    ctx.body = {
+      message: DemoServices.helloWithSecret(ctx.state.jwtdata.name, secretMsg),
+    };
+  }
 }

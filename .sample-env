@@ -3,3 +3,12 @@
 
 # Application port (default 3000)
 PORT=3000
+
+# JWT shared secret
+# - See JWT_KEYFILE below if you wish to use key pairs
+JWT_SECRET=my-256-bit-secret
+
+# JWT key files
+# - If present, will override the secret above.
+# - The public key file must be named JWT_KEYFILE.pub
+JWT_KEYFILE=.jwtkey

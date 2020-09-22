@@ -5,8 +5,8 @@ import bodyParser from "koa-bodyparser";
 import jwt from "koa-jwt";
 import helmet from "koa-helmet";
 
-import { unprotectedRouter } from "./routes.unprotected";
-import { protectedRouter } from "./routes.protected";
+import { unsecuredRouter } from "./routes/routes";
+import { securedRouter } from "./routes/routes.secure";
 
 /** Local imports **/
 import { config } from "./config";
@@ -21,14 +21,14 @@ app.use(logger());
 app.use(bodyParser());
 
 /** Routes **/
-// unprotected routes
-app.use(unprotectedRouter.routes()).use(unprotectedRouter.allowedMethods());
+// Unsecured routes
+app.use(unsecuredRouter.routes()).use(unsecuredRouter.allowedMethods());
 
 // Middleware below this line is only reached if JWT token is valid
 app.use(jwt({ secret: config.jwtSecret, key: "jwtdata" }));
 
-// Protected routes
-app.use(protectedRouter.routes()).use(protectedRouter.allowedMethods());
+// Secured routes
+app.use(securedRouter.routes()).use(securedRouter.allowedMethods());
 
 const PORT = config.port;
 const server = app

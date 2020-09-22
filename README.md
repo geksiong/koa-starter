@@ -26,9 +26,9 @@ This project aims to provide a starter layout, configuration and workflow for a 
 
 ## To do list
 
-- [x] dotenv support
-- [ ] koa-helmet
-- [x] koa-jwt
+- [x] ~~dotenv support~~
+- [x] ~~koa-helmet~~
+- [x] ~~koa-jwt~~
 - [ ] user auth and jwt issuance
 - [ ] cors
 - [ ] choose a logger framework
@@ -41,9 +41,9 @@ This project aims to provide a starter layout, configuration and workflow for a 
 
 ## Getting Started
 
-* Install dependencies: `yarn install`
-* Run project in TS: `yarn dev`
-* Build project: `yarn build`
-  * output in `./dist` folder
-* Run compiled JS in output folder: `yarn start`
-* Clean output folder: `yarn clean`
+- Install dependencies: `yarn install`
+- Run project in TS: `yarn dev`
+- Build project: `yarn build`
+  - output in `./dist` folder
+- Run compiled JS in output folder: `yarn start`
+- Clean output folder: `yarn clean`

@@ -3,6 +3,7 @@ import logger from "koa-logger";
 import json from "koa-json";
 import bodyParser from "koa-bodyparser";
 import jwt from "koa-jwt";
+import helmet from "koa-helmet";
 
 import { unprotectedRouter } from "./routes.unprotected";
 import { protectedRouter } from "./routes.protected";
@@ -14,6 +15,7 @@ import { config } from "./config";
 const app = new Koa();
 
 /** Middlewares **/
+app.use(helmet());
 app.use(json());
 app.use(logger());
 app.use(bodyParser());

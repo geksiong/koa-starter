@@ -3,7 +3,7 @@
  */
 
 import { Context } from "koa";
-import DemoServices from "../services/demo";
+import DemoServices from "./demo.services";
 
 export default class DemoController {
   public static async hello(ctx: Context): Promise<void> {

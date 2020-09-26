@@ -2,14 +2,11 @@ import Koa from "koa";
 import logger from "koa-logger";
 import json from "koa-json";
 import bodyParser from "koa-bodyparser";
-import jwt from "koa-jwt";
 import helmet from "koa-helmet";
-
-import { unsecuredRouter } from "./routes/routes";
-import { securedRouter } from "./routes/routes.secure";
 
 /** Local imports **/
 import { config } from "./config";
+import demoApis from "./services/demo";
 
 /** Start **/
 const app = new Koa();
@@ -20,15 +17,14 @@ app.use(json());
 app.use(logger());
 app.use(bodyParser());
 
-/** Routes **/
-// Unsecured routes
-app.use(unsecuredRouter.routes()).use(unsecuredRouter.allowedMethods());
+/** APIs **/
 
-// Middleware below this line is only reached if JWT token is valid
-app.use(jwt({ secret: config.jwtSecret, key: "jwtdata" }));
-
-// Secured routes
-app.use(securedRouter.routes()).use(securedRouter.allowedMethods());
+// Demo APIs
+const demoRouter = demoApis({
+  prefix: "/demo",
+  jwtSecret: config.jwtSecret,
+});
+app.use(demoRouter.routes()).use(demoRouter.allowedMethods());
 
 const PORT = config.port;
 const server = app

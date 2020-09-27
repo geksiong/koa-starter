@@ -4,6 +4,7 @@ import json from "koa-json";
 import bodyParser from "koa-bodyparser";
 import helmet from "koa-helmet";
 import serve from "koa-static";
+import mount from "koa-mount";
 
 /** Local imports **/
 import { config } from "./config";
@@ -19,10 +20,11 @@ app.use(logger());
 app.use(bodyParser());
 
 /** Public folders **/
+// Use koa-mount and koa-static to serve from "/public" route
 // NOTE: It appears koa-static can't be used in nested routes
 // so we can only serve from the root app
 // TODO: copy these folders into build
-app.use(serve(__dirname + "/public"));
+app.use(mount("/public", serve(__dirname + "/public")));
 
 /** APIs **/
 

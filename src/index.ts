@@ -1,5 +1,4 @@
 import Koa from "koa";
-import logger from "koa-logger";
 import json from "koa-json";
 import bodyParser from "koa-bodyparser";
 import helmet from "koa-helmet";
@@ -8,6 +7,7 @@ import mount from "koa-mount";
 
 /** Local imports **/
 import { config } from "./config";
+import { logger, koaLogger } from "./lib/logger";
 import demoApis from "./services/demo";
 
 /** Start **/
@@ -16,7 +16,7 @@ const app = new Koa();
 /** Middlewares **/
 app.use(helmet());
 app.use(json());
-app.use(logger());
+app.use(koaLogger);
 app.use(bodyParser());
 
 /** Public folders **/
@@ -37,7 +37,7 @@ app.use(demoRouter.routes()).use(demoRouter.allowedMethods());
 
 const PORT = config.port;
 const server = app
-  .listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+  .listen(PORT, () => logger.info(`Server started. Listening on port ${PORT}`))
   .on("error", (err) => {
     console.log(err);
   });

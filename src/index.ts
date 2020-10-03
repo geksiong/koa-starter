@@ -37,7 +37,10 @@ app.use(demoRouter.routes()).use(demoRouter.allowedMethods());
 
 const PORT = config.port;
 const server = app
-  .listen(PORT, () => logger.info(`Server started. Listening on port ${PORT}`))
+  .listen(PORT, () => {
+    const mode = config.isDevMode ? "development" : "production";
+    logger.info(`Server started in ${mode} mode. Listening on port ${PORT}`);
+  })
   .on("error", (err) => {
     console.log(err);
   });
